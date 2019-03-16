@@ -42,7 +42,7 @@ let inputListener = (difficultyLevel) => { // TODO check if str is number in 1-5
 	let wordLength = wordLengthByDifficulty [ difficultyLevel - 1 ] .chooseRandom ( );
 	let wordCount = wordCountByDifficulty [ difficultyLevel - 1 ] .chooseRandom ( );
 	
-	let words = fs .readFileSync ('enable1.txt', 'utf-8')
+	let words = fs .readFileSync ('../../resources/enable1.txt', 'utf-8')
 	                    .split ('\r\n')
 						.filter ((word) => word .length === wordLength);
 
