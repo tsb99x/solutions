@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <header>
+        <meta charset="utf-8">
+        <meta name="author" content="Anton Muravev"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>1-intermediate-schedule-edit</title>
+        <style>
+
+            #container th, td {
+                padding: .25rem 1rem;
+                border: 1px solid black;
+            }
+
+        </style>
+    </header>
+    <body>
+        <table id="container">
+            <tr>
+                <th>time</th>
+                <th>note</th>
+                <th>actions</th>
+            </tr>
+            <tr>
+                <td>10:00</td>
+                <td>a</td>
+                <td>
+                    <button>▲</button>
+                    <button>▼</button>
+                    <button>🖉</button>
+                    <button>⨯</button>
+                </td>
+            </tr>
+            <tr>
+                <td>11:00</td>
+                <td>b</td>
+                <td>
+                    <button>▲</button>
+                    <button>▼</button>
+                    <button>🖉</button>
+                    <button>⨯</button>
+                </td>
+            </tr>
+        </table>
+
+        <button id="add">add new event</button>
+
+        <script>
+        
+            const container = document.getElementById('container')
+            const addBtn = document.getElementById('add')
+
+            const full24hTimeFormat = /^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])/
+
+            function promptInput(message, error, predicate) {
+
+                while (true) {
+
+                    const input = prompt(message)
+
+                    if (predicate(input)) {
+                        return input
+                    }
+
+                    alert(error)
+
+                }
+
+            }
+
+            addBtn.addEventListener('click', () => {
+
+                const time = promptInput(
+                    'input event time [ hh:mm ]',
+                    'format of [ hh:mm ] must be respected',
+                    (input) => full24hTimeFormat.test(input)
+                )
+
+                const desc = promptInput(
+                    'input event description [ string ]',
+                    'input must not be empty',
+                    (input) => input.length > 0
+                )
+
+            })
+
+        </script>
+    </body>
+</html>
