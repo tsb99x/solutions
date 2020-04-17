@@ -1,16 +1,10 @@
 import java.util.Scanner;
 
-class Main {
+class Application {
 
     public static void main(String[] args) {
-
         new Application().run();
-
     }
-
-}
-
-class Application {
 
     public void run() {
 
@@ -52,11 +46,7 @@ class Application {
                 }
 
                 System.out.println("Invalid input, please select one of [l], [h] or [i]");
-
             }
-
         }
-
     }
-
 }

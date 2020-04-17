@@ -4,26 +4,17 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
-class Main {
-
-    public static void main(String[] args) {
-
-        new Application().run();
-
-    }
-
-}
-
 class Application {
 
+    public static void main(String[] args) {
+        new Application().run();
+    }
+
     private final static Scanner scanner = new Scanner(System.in);
-
     private final List<Event> events = new ArrayList<>();
-
     private final List<Command> commands = List.of(
 
             new Command("help", 0, args -> {
-
                 System.out.println("command list: \n"
                         + "\t- help                 -- output current message    \n"
                         + "\t- list                 -- ordered list of all events\n"
@@ -32,126 +23,85 @@ class Application {
                         + "\t- delete {INDEX}       -- remove specific event     \n"
                         + "\t- exit                 -- quit application          "
                 );
-
             }),
 
             new Command("list", 0, args -> {
-
                 if (events.isEmpty()) {
                     System.out.println("no events added yet");
                     return;
                 }
-
                 int idx = 0;
                 for (final var event : events) {
                     System.out.println(idx + " : " + event);
                     idx++;
                 }
-
             }),
 
             new Command("create", 2, args -> {
-
                 try {
-
                     var hour = Integer.parseInt(args[1]);
-
                     if (hour < 0 || hour > 23) {
                         System.out.println("{HOUR} argument must be in [0, 23], but was '" + hour + "'");
                         return;
                     }
-
                     events.add(new Event(hour, args[2]));
                     events.sort(Comparator.comparingInt(Event::getHour));
-
                     System.out.println("event was successfully added");
-
                 } catch (NumberFormatException e) {
-
                     System.out.println("{HOUR} argument must be an int");
-
                 }
-
             }),
 
             new Command("update", 1, args -> {
-
                 // copy of list's check
                 if (events.isEmpty()) {
                     System.out.println("no events added yet");
                     return;
                 }
-
                 try {
-
                     var idx = Integer.parseInt(args[1]);
                     var event = events.get(idx);
-
                     try {
-
                         System.out.print("input {HOUR} (" + event.getHour() + ") > ");
                         var hourInput = scanner.nextLine();
                         if (!hourInput.isEmpty()) {
                             event.setHour(Integer.parseInt(hourInput));
                         }
-
                         System.out.print("input name (" + event.getName() + ") > ");
                         var nameInput = scanner.nextLine();
                         if (!nameInput.isEmpty()) {
                             event.setName(nameInput);
                         }
-
                         System.out.println("event was successfully updated");
-
                     } catch (NumberFormatException e) {
-
                         System.out.println("{HOUR} argument must be in [0, 23]");
-
                     }
-
                 } catch (NumberFormatException e) {
-
                     System.out.println("{INDEX} argument must be an int");
-
                 } catch (IndexOutOfBoundsException e) {
-
                     System.out.println("{INDEX} argument must be in [0, " + (events.size() - 1) + "]");
-
                 }
-
             }),
 
             new Command("delete", 1, args -> {
-
                 // copy of list's check
                 if (events.isEmpty()) {
                     System.out.println("no events added yet");
                     return;
                 }
-
                 try {
-
                     var idx = Integer.valueOf(args[1]);
                     events.remove((int) idx);
-
                 } catch (NumberFormatException e) {
-
                     System.out.println("{INDEX} argument must be an int");
-
                 } catch (IndexOutOfBoundsException e) {
-
                     System.out.println("{INDEX} argument must be in [0, " + (events.size() - 1) + "]");
-
                 }
-
             }),
 
             new Command("exit", 0, args -> {
-
                 isRunning = false;
-
             })
-
     );
 
     private boolean isRunning = true;
