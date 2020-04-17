@@ -69,22 +69,6 @@ inline std::vector<std::string> read_file(const std::string &filepath)
 }
 
 /**
- * Standard input procedure.
- * Invites user to input data.
- * Returns a full line of input.
- */
-
-inline std::string prompt(const std::string &invite)
-{
-    std::string res;
-
-    std::cout << invite;
-    std::getline(std::cin, res);
-
-    return res;
-}
-
-/**
  * Insert newline into output.
  * Use like std::cout << newl;
  * Prefer this instead of std::endl to prevent flush part.

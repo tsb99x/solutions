@@ -1,0 +1,12 @@
+root = true
+
+[*]
+charset = utf-8
+insert_final_newline = true
+indent_style = space
+
+[*.c]
+indent_size = 8
+
+[*{.java,.cpp}]
+indent_size = 4

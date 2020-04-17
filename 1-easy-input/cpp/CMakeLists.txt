@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.7)
 project(1_easy_input VERSION 0.1.0)
-
 set(CMAKE_CXX_STANDARD 17)
 
 if (MSVC)
@@ -9,6 +8,4 @@ else ()
     add_compile_options(-Wall -Wextra -pedantic -Werror)
 endif ()
 
-add_executable(main main.cpp)
-add_subdirectory(../../utils/cpp utils)
-target_link_libraries(main utils)
+add_executable(${PROJECT_NAME} main.cpp)

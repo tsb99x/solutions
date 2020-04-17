@@ -1,7 +1,16 @@
-#include "utils.hpp"
+#include <string>
+#include <iostream>
+#include <fstream>
 
 using namespace std;
-using namespace utils;
+
+string prompt(const string &invite)
+{
+    string res;
+    cout << invite;
+    getline(cin, res);
+    return res;
+}
 
 int main()
 {
@@ -16,7 +25,7 @@ int main()
     ofstream os("log.txt", ios_base::app);
     if (!os.is_open()) {
         cerr << "Failed to open 'log.txt' file";
-        exit(EXIT_FAILURE);
+        return -1;
     }
 
     os << "name: " << name
