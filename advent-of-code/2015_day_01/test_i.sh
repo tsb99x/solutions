@@ -4,8 +4,8 @@ BIN=/tmp/part_i
 SRC=./part_i.c
 
 check () {
-        echo "$1" | $BIN | grep -qxe "$2" && return 0 \
-                || echo "check for $1 -> $2 has failed!" && return 1
+        [ "$(echo "$1" | $BIN)" = "$2" ] \
+                || (echo "check for $1 -> $2 has failed!" && false)
 }
 
 clang -O2 -ansi \

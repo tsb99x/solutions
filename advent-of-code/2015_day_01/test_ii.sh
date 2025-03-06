@@ -1,11 +1,14 @@
-#!/bin/bash -e
+#!/bin/bash -eu
 
 BIN=/tmp/part_ii
 SRC=./part_ii.c
 
 check () {
-        echo "$1" | $BIN | grep -qxe "$2" && return 0 \
-                || echo "check for $1 -> $2 has failed!" && return 1
+        echo -n "Test $1 => $2 "
+        OUTPUT=$(echo "$1" | $BIN || true)
+        [ "$OUTPUT" = "$2" ] \
+                || (echo "FAILED, output: $OUTPUT" && false)
+        echo "PASSED"
 }
 
 clang -O2 -ansi \
