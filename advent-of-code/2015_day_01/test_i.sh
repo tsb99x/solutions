@@ -5,7 +5,7 @@ SRC=./part_i.c
 
 check () {
         [ "$(echo "$1" | $BIN)" = "$2" ] \
-                || (echo "check for $1 -> $2 has failed!" && false)
+                || (echo "check for $1 -> $2 has failed!" && return 1)
 }
 
 clang -O2 -ansi \

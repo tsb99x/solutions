@@ -12,4 +12,6 @@ BinPackArguments: false
 BinPackParameters: false
 AllowAllParametersOfDeclarationOnNextLine: false
 BreakBeforeBinaryOperators: NonAssignment
+SpaceAfterCStyleCast: true
+AlwaysBreakAfterDefinitionReturnType: TopLevel
 ...
