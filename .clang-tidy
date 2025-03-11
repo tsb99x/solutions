@@ -1,3 +1,15 @@
 ---
-Checks: '*,-llvmlibc-restrict-system-libc-headers,-readability-identifier-length,-altera-unroll-loops'
+Checks: >-
+    *,
+    -altera-id-dependent-backward-branch,
+    -altera-struct-pack-align,
+    -altera-unroll-loops,
+    -concurrency-mt-unsafe,
+    -llvmlibc-restrict-system-libc-headers,
+    -readability-identifier-length,
+    -clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling,
+    -cert-err34-c,
+    -misc-no-recursion,
+    -bugprone-easily-swappable-parameters,
+WarningsAsErrors: '*'
 ...

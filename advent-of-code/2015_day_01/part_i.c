@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static int
-char_to_movement(char ch)
+static int char_to_movement(char ch)
 {
         switch (ch) {
         case '(':
@@ -14,14 +13,13 @@ char_to_movement(char ch)
         }
 }
 
-static int
-what_floor(FILE *stream)
+static int what_floor(FILE *stream)
 {
         int floor = 0;
         int ch = 0;
 
         while ((ch = fgetc(stream)) != EOF) {
-                floor += char_to_movement((char) ch);
+                floor += char_to_movement((char)ch);
         }
 
         if (!feof(stream)) {
@@ -32,16 +30,15 @@ what_floor(FILE *stream)
         return floor;
 }
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
         int floor = 0;
 
-        (void) argc;
-        (void) argv;
+        (void)argc;
+        (void)argv;
 
         floor = what_floor(stdin);
-        (void) printf("%d\n", floor);
+        (void)printf("%d\n", floor);
 
         return EXIT_SUCCESS;
 }
