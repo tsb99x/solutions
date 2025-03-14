@@ -39,7 +39,12 @@ int main(int argc, char *argv[])
 {
         int position = 0;
 
-        (void)argc;
+        if (argc > 1) {
+                (void)fputs("No arguments are accepted!\n"
+                            "Use like this: part_ii < input\n",
+                            stderr);
+                return EXIT_FAILURE;
+        }
         (void)argv;
 
         position = basement_enter(stdin);

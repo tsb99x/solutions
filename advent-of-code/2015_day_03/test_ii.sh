@@ -1,4 +1,6 @@
-#!/bin/bash -eu
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
 
 BIN=/tmp/part_ii
 SRC=./part_ii.c
