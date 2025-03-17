@@ -32,6 +32,7 @@ gcc -g -Og -std=c99 \
         -o "$BIN" "$SRC"
 
 clang-tidy $SRC 2> /dev/null
+cppcheck --enable=all --suppress=missingIncludeSystem $SRC
 
 check ')' 1
 check '()())' 5

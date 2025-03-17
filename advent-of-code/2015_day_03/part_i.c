@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
 
         if (argc > 1) {
                 (void)fputs("No arguments are accepted!\n"
-                            "Use like this: part_i < input\n",
+                            "Use IO redirection: part_i < input\n",
                             stderr);
                 return EXIT_FAILURE;
         }
