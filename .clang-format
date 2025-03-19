@@ -6,8 +6,6 @@ AllowShortIfStatementsOnASingleLine: false
 IndentCaseLabels: false
 InsertBraces: true
 SeparateDefinitionBlocks : Always
-BinPackArguments: false
-BinPackParameters: false
 AllowAllParametersOfDeclarationOnNextLine: false
 BreakBeforeBinaryOperators: NonAssignment
 ...

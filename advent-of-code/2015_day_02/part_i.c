@@ -21,7 +21,14 @@ static int total_feet_of_paper(FILE *stream)
         int h = 0;
         int total = 0;
 
-        while (fscanf(stream, "%3dx%3dx%3d", &l, &w, &h) == 3) {
+        while (fscanf(stream, "%3d x %3d x %3d", &l, &w, &h) == 3) {
+                if ((l <= 0) || (w <= 0) || (h <= 0)) {
+                        (void)fprintf(stderr,
+                                      "All sizes must be >= 0, "
+                                      "but dimensions were: %d x %d x %d\n",
+                                      l, w, h);
+                        exit(EXIT_FAILURE);
+                }
                 total += feet_of_paper(l, w, h);
         }
 
@@ -38,12 +45,12 @@ int main(int argc, char *argv[])
         int total = 0;
 
         if (argc > 1) {
-                (void)fputs("No arguments are accepted!\n"
-                            "Use IO redirection: part_i < input\n",
-                            stderr);
+                (void)fprintf(stderr,
+                              "No arguments are accepted!\n"
+                              "Use IO redirection: %s < input\n",
+                              argv[0]);
                 return EXIT_FAILURE;
         }
-        (void)argv;
 
         total = total_feet_of_paper(stdin);
         (void)printf("%d\n", total);

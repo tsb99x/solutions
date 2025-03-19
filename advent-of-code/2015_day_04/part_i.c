@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_ARG_LEN 32
+#define MAX_ARG_LEN 32U
 #define BUF_SIZE 64
 
 static long find_five_zeroes(const char prefix[])
@@ -15,19 +15,25 @@ static long find_five_zeroes(const char prefix[])
         unsigned int md_size = 0;
 
         for (long i = 1; i < LONG_MAX; i++) {
-                if (snprintf(buf, sizeof(buf), "%s%ld", prefix, i) < 0) {
+                int chs = snprintf(buf, sizeof(buf), "%s%ld", prefix, i);
+                if (chs < 0) {
                         perror("Failed to snprintf");
                         exit(EXIT_FAILURE);
                 }
+                if ((size_t)chs >= sizeof(buf)) {
+                        (void)fputs("Failed to snprintf: Buffer overflow\n",
+                                    stderr);
+                        exit(EXIT_FAILURE);
+                }
 
-                if (!EVP_Digest(
-                        buf, strlen(buf), md, &md_size, EVP_md5(), NULL)) {
+                if (!EVP_Digest(buf, strlen(buf), md, &md_size, EVP_md5(),
+                                NULL)) {
                         ERR_print_errors_fp(stderr);
                         exit(EXIT_FAILURE);
                 }
 
                 // NOLINTNEXTLINE
-                if ((md[0] == 0x00) && (md[1] == 0x00) && (md[2] < 0x10)) {
+                if ((md[0] == 0x00U) && (md[1] == 0x00U) && (md[2] < 0x10U)) {
                         return i;
                 }
         }
@@ -41,20 +47,19 @@ int main(int argc, char *argv[])
         long suffix = 0;
 
         if (argc != 2) {
-                (void)fputs("Only one argument is accepted!\n"
-                            "Use like this: part_i prefix\n",
-                            stderr);
+                (void)fprintf(stderr,
+                              "Only one argument is accepted!\n"
+                              "Use like this: %s prefix\n",
+                              argv[0]);
                 return EXIT_FAILURE;
         }
-        (void)argv;
 
         arg_len = strlen(argv[1]);
         if (arg_len > MAX_ARG_LEN) {
                 (void)fprintf(stderr,
-                              "Secret prefix argument must be less than %d "
+                              "Secret prefix argument must be less than %u "
                               "chars of length, but was %zu\n",
-                              MAX_ARG_LEN,
-                              arg_len);
+                              MAX_ARG_LEN, arg_len);
                 return EXIT_FAILURE;
         }
 

@@ -71,12 +71,12 @@ int main(int argc, char *argv[])
         int houses = 0;
 
         if (argc > 1) {
-                (void)fputs("No arguments are accepted!\n"
-                            "Use IO redirection: part_i < input\n",
-                            stderr);
+                (void)fprintf(stderr,
+                              "No arguments are accepted!\n"
+                              "Use IO redirection: %s < input\n",
+                              argv[0]);
                 return EXIT_FAILURE;
         }
-        (void)argv;
 
         houses = how_many_houses(stdin);
         (void)printf("%d\n", houses);

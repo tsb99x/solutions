@@ -35,12 +35,12 @@ int main(int argc, char *argv[])
         int floor = 0;
 
         if (argc > 1) {
-                (void)fputs("No arguments are accepted!\n"
-                            "Use IO redirection: part_i < input\n",
-                            stderr);
+                (void)fprintf(stderr,
+                              "No arguments are accepted!\n"
+                              "Use IO redirection: %s < input\n",
+                              argv[0]);
                 return EXIT_FAILURE;
         }
-        (void)argv;
 
         floor = what_floor(stdin);
         (void)printf("%d\n", floor);
