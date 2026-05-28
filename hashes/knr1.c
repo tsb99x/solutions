@@ -20,15 +20,3 @@ int main(void)
 
         return 0;
 }
-
-/*
-
-$ gcc hashes_knr1.c
-$ cat /usr/share/dict/words | ./a.out | sort | uniq | wc -l
-1843
-$ cat /usr/share/dict/words | ./a.out | wc -l
-104334
-$ cat /usr/share/dict/words | wc -l
-104334
-
-*/
