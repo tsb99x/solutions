@@ -4,8 +4,12 @@ IndentWidth: 8
 BreakBeforeBraces: Linux
 AllowShortIfStatementsOnASingleLine: false
 IndentCaseLabels: false
+
+# Customized
 InsertBraces: true
 SeparateDefinitionBlocks : Always
+BinPackArguments: false
+BinPackParameters: false
 AllowAllParametersOfDeclarationOnNextLine: false
 BreakBeforeBinaryOperators: NonAssignment
 ...

@@ -1,20 +1,24 @@
 #include <stdio.h>
 
-int main(void) {
-  unsigned int hash = 0;
-  int c;
+int main(void)
+{
+        unsigned int hash = 0;
+        int c;
 
-  while ((c = getchar()) != EOF)
-    if (c == '\n') {
-      printf("%u\n", hash);
-      hash = 0;
-    } else
-      hash = c + 31 * hash;
+        while ((c = getchar()) != EOF) {
+                if (c == '\n') {
+                        printf("%u\n", hash);
+                        hash = 0;
+                } else {
+                        hash = c + 31 * hash;
+                }
+        }
 
-  if (hash != 0)
-    printf("%u\n", hash);
+        if (hash != 0) {
+                printf("%u\n", hash);
+        }
 
-  return 0;
+        return 0;
 }
 
 /*
