@@ -1,4 +1,5 @@
 .DELETE_ON_ERROR:
+.SUFFIXES:
 
 SRCS = $(wildcard *.c)
 BINS = $(SRCS:%.c=%)
@@ -16,3 +17,6 @@ define test
 	$(eval TOTAL := $(shell cat /usr/share/dict/words | wc -l))
 	@echo "$(BIN) distinct hashes: $(UNIQS) of $(TOTAL) words"
 endef
+
+%: %.c
+	$(CC) $< -o $@
