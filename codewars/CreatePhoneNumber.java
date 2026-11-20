@@ -1,11 +1,6 @@
-package codewars;
+// see: https://www.codewars.com/kata/525f50e3b73515a6db000b83
 
-public class CW3 {
-
-    public static void main(String[] args) {
-        System.out.println(
-                createPhoneNumber(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 }));
-    }
+public class CreatePhoneNumber {
 
     public static String createPhoneNumber(int[] numbers) {
         return String.format("(%d%d%d) %d%d%d-%d%d%d%d",

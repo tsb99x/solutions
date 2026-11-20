@@ -1,9 +1,9 @@
-package codewars;
+// see: https://www.codewars.com/kata/546e2562b03326a88e000020
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class CW5 {
+public class SquareDigit {
 
     public int squareDigits(int n) {
         var digits = String.valueOf(n).split("");
@@ -13,7 +13,6 @@ public class CW5 {
                 .map(String::valueOf)
                 .collect(Collectors.joining(""));
         return Integer.parseInt(str);
-        //        Collections.swap(null, n, n);
     }
 
 }

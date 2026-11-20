@@ -1,13 +1,11 @@
+// see: https://www.codewars.com/kata/54bf1c2cd5b56cc47f0007a1
+
 package codewars;
 
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class CW4 {
-
-    public static void main(String[] args) {
-        System.out.println(duplicateCount("abcde"));
-    }
+public class CountingDuplicates {
 
     public static int duplicateCount(String text) {
         return (int) text.toLowerCase()
