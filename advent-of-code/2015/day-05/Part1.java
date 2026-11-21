@@ -1,7 +1,9 @@
+static final String VOWELS = "aeiou";
+static final List<String> FORBIDDEN = List.of("ab", "cd", "pq", "xy");
+
 boolean isNice(String s) {
-    var vowels = "aeiou";
     var hasAtLeast3Vowels = s.codePoints()
-            .filter(ch -> vowels.indexOf(ch) >= 0)
+            .filter(ch -> VOWELS.indexOf(ch) >= 0)
             .count() >= 3;
 
     var hasDuplicateChars = s.codePoints()
@@ -9,8 +11,7 @@ boolean isNice(String s) {
             .gather(Gatherers.windowSliding(2))
             .anyMatch(w -> w.getFirst().equals(w.getLast()));
 
-    var forbidden = List.of("ab", "cd", "pq", "xy");
-    var hasNoForbidden = forbidden.stream()
+    var hasNoForbidden = FORBIDDEN.stream()
             .noneMatch(s::contains);
 
     return hasAtLeast3Vowels

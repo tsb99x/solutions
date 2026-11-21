@@ -14,6 +14,8 @@ class Santa {
             case '<' -> x--;
             case '^' -> y--;
             case 'v' -> y++;
+            default -> {
+                /* NOOP */ }
         }
         return new House(x, y);
     }

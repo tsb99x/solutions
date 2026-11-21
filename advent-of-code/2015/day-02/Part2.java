@@ -1,8 +1,10 @@
 import java.util.regex.Pattern;
 
+static final Pattern PATTERN = Pattern.compile(
+        "^(\\d{1,3})x(\\d{1,3})x(\\d{1,3})$");
+
 int calcLength(String line) {
-    var pattern = Pattern.compile("^(\\d+)x(\\d+)x(\\d+)$");
-    var matcher = pattern.matcher(line);
+    var matcher = PATTERN.matcher(line);
     if (!matcher.find()) {
         throw new IllegalArgumentException("Failed to parse line '" + line + "'!");
     }
