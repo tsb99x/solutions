@@ -5,7 +5,7 @@ boolean isNice(String s) {
             .gather(Gatherers.windowSliding(span))
             .map(w -> w.stream()
                     .map(Character::toString)
-                    .reduce("", String::concat))
+                    .collect(Collectors.joining()))
             .map(ws -> s.lastIndexOf(ws) - s.indexOf(ws))
             .anyMatch(d -> d >= span);
 
