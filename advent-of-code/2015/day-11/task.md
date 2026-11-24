@@ -1,3 +1,5 @@
+Original URL of the puzzle: https://adventofcode.com/2015/day/11
+
 # --- Day 11: Corporate Policy ---
 
 Santa's previous password expired, and he needs help choosing a new one.
@@ -22,4 +24,14 @@ For example:
 
 Given Santa's current password (your puzzle input), what should his *next password* be?
 
-Your puzzle input is `cqjxjnds`.
+Your puzzle answer was `cqjxxyzz`.
+
+# --- Part Two ---
+
+Santa's password expired again. What's the next one?
+
+Your puzzle answer was `cqkaabcc`.
+
+Both parts of this puzzle are complete! They provide two gold stars: **
+
+Your puzzle input was `cqjxjnds`.

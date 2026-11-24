@@ -1,3 +1,5 @@
+Original URL of the puzzle: https://adventofcode.com/2015/day/13
+
 # --- Day 13: Knights of the Dinner Table ---
 
 In years past, the holiday feast with your family hasn't gone so well. Not everyone gets along! This year, you resolve, will be different. You're going to find the *optimal seating arrangement* and avoid all those awkward conversations.
