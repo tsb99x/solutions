@@ -14,17 +14,14 @@ class Graph {
     private final Map<String, List<Destination>> flights = new HashMap<>();
 
     void addEntry(String from, Destination destination) {
-        flights.compute(from, (k, v) -> {
-            v = v != null ? v : new ArrayList<>();
-            v.add(destination);
-            return v;
-        });
+        flights.computeIfAbsent(from, _ -> new ArrayList<>())
+                .add(destination);
     }
 
     void parse(String line) {
         var matcher = PATTERN.matcher(line);
         if (!matcher.find()) {
-            throw new IllegalArgumentException("Failed to parse line '" + line + "'");
+            throw new IllegalArgumentException("Failed to parse line '" + line + "'!");
         }
         var from = matcher.group(1);
         var to = matcher.group(2);

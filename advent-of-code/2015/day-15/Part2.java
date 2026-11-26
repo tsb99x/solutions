@@ -14,7 +14,7 @@ record Ingredient(
     static Ingredient parse(String line) {
         var matcher = PATTERN.matcher(line);
         if (!matcher.find()) {
-            throw new IllegalArgumentException("Failed to parse line '" + line + "'");
+            throw new IllegalArgumentException("Failed to parse line '" + line + "'!");
         }
         return new Ingredient(
                 matcher.group(1),

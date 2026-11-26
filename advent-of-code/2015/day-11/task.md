@@ -34,4 +34,4 @@ Your puzzle answer was `cqkaabcc`.
 
 Both parts of this puzzle are complete! They provide two gold stars: **
 
-Your puzzle input was `cqjxjnds`.
+Your puzzle input was *`cqjxjnds`*.

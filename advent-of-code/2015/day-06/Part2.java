@@ -8,7 +8,7 @@ class Lights {
     void apply(String cmd) {
         var matcher = PATTERN.matcher(cmd);
         if (!matcher.find()) {
-            throw new IllegalArgumentException("Failed to parse command '" + cmd + "'");
+            throw new IllegalArgumentException("Failed to parse command '" + cmd + "'!");
         }
         var op = matcher.group(1);
         var fromX = Integer.parseInt(matcher.group(2));
@@ -21,7 +21,7 @@ class Lights {
                     case "turn on" -> grid[x][y] += 1;
                     case "toggle" -> grid[x][y] += 2;
                     case "turn off" -> grid[x][y] = (char) Math.max(grid[x][y] - 1, 0);
-                    default -> throw new IllegalArgumentException("Failed to apply operation '" + op + "'");
+                    default -> throw new IllegalArgumentException("Failed to apply operation '" + op + "'!");
                 }
             }
         }

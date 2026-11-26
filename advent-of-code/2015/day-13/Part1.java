@@ -3,21 +3,19 @@ import java.util.HashMap;
 
 // FIXME : Extremely dirty and type-specific algorithm!
 List<List<String>> permutations(Collection<String> elements) {
-    var possibilities = new ArrayList<List<String>>();
-    if (elements.isEmpty()) {
-        possibilities.add(new ArrayList<>());
-        return possibilities;
-    }
+    var result = new ArrayList<List<String>>();
     for (String element : elements) {
         var subElements = new ArrayList<>(elements);
         subElements.remove(element);
-        var subPossibilities = permutations(subElements);
-        for (List<String> subPos : subPossibilities) {
-            subPos.addFirst(element);
+        for (var permutation : permutations(subElements)) {
+            permutation.addFirst(element);
+            result.add(permutation);
         }
-        possibilities.addAll(subPossibilities);
     }
-    return possibilities;
+    if (result.isEmpty()) {
+        result.add(new ArrayList<>());
+    }
+    return result;
 }
 
 class DinnerTable {
@@ -30,18 +28,18 @@ class DinnerTable {
     void parse(String line) {
         var matcher = PATTERN.matcher(line);
         if (!matcher.find()) {
-            throw new IllegalArgumentException("Failed to parse line '" + line + "'");
+            throw new IllegalArgumentException("Failed to parse line '" + line + "'!");
         }
         var who = matcher.group(1);
         var effect = switch (matcher.group(2)) {
             case "gain" -> 1;
             case "lose" -> -1;
-            default -> throw new IllegalStateException("Failed to parse effect '" + matcher.group(2) + "'");
+            default -> throw new IllegalStateException("Failed to parse effect '" + matcher.group(2) + "'!");
         };
         var happiness = effect * Integer.parseInt(matcher.group(3));
         var other = matcher.group(4);
-        var neighbors = guests.computeIfAbsent(who, k -> new HashMap<>());
-        neighbors.put(other, happiness);
+        guests.computeIfAbsent(who, _ -> new HashMap<>())
+                .put(other, happiness);
     }
 
     int bestArrangement() {

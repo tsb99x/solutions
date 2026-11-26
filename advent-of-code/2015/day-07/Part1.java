@@ -75,7 +75,7 @@ class Circuit {
             wires.put(wire, () -> resolve(a) >> resolve(b));
             return;
         }
-        throw new IllegalArgumentException("Failed to parse line '" + line + "'");
+        throw new IllegalArgumentException("Failed to parse line '" + line + "'!");
     }
 
 }

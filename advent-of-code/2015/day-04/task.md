@@ -21,4 +21,4 @@ Your puzzle answer was `3938038`.
 
 Both parts of this puzzle are complete! They provide two gold stars: **
 
-Your puzzle input was `ckczppom`.
+Your puzzle input was *`ckczppom`*.

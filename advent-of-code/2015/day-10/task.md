@@ -28,4 +28,4 @@ Your puzzle answer was `6989950`.
 
 Both parts of this puzzle are complete! They provide two gold stars: **
 
-Your puzzle input was `1321131112`.
+Your puzzle input was *`1321131112`*.

@@ -24,7 +24,7 @@ class Reindeer {
     Reindeer(String line) {
         var matcher = PATTERN.matcher(line);
         if (!matcher.find()) {
-            throw new IllegalArgumentException("Failed to parse line '" + line + "'");
+            throw new IllegalArgumentException("Failed to parse line '" + line + "'!");
         }
         name = matcher.group(1);
         kmPerSecond = Integer.parseInt(matcher.group(2));
