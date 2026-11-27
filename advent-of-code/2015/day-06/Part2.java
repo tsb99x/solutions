@@ -3,7 +3,7 @@ class Lights {
     private static final Pattern PATTERN = Pattern.compile(
             "^(turn on|toggle|turn off) (\\d{1,3}),(\\d{1,3}) through (\\d{1,3}),(\\d{1,3})$");
 
-    private final char[][] grid = new char[1000][1000];
+    private final int[][] grid = new int[1000][1000];
 
     void apply(String cmd) {
         var matcher = PATTERN.matcher(cmd);
@@ -20,7 +20,7 @@ class Lights {
                 switch (op) {
                     case "turn on" -> grid[x][y] += 1;
                     case "toggle" -> grid[x][y] += 2;
-                    case "turn off" -> grid[x][y] = (char) Math.max(grid[x][y] - 1, 0);
+                    case "turn off" -> grid[x][y] = Math.max(grid[x][y] - 1, 0);
                     default -> throw new IllegalArgumentException("Failed to apply operation '" + op + "'!");
                 }
             }

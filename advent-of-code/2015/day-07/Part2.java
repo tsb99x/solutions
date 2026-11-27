@@ -5,11 +5,8 @@ import java.util.regex.Pattern;
 class Circuit {
 
     private static final Pattern input = Pattern.compile("^(\\w+) -> (\\w+)$");
-    private static final Pattern and = Pattern.compile("^(\\w+) AND (\\w+) -> (\\w+)$");
-    private static final Pattern lshift = Pattern.compile("^(\\w+) LSHIFT (\\w+) -> (\\w+)$");
     private static final Pattern not = Pattern.compile("^NOT (\\w+) -> (\\w+)$");
-    private static final Pattern or = Pattern.compile("^(\\w+) OR (\\w+) -> (\\w+)$");
-    private static final Pattern rshift = Pattern.compile("^(\\w+) RSHIFT (\\w+) -> (\\w+)$");
+    private static final Pattern binary = Pattern.compile("^(\\w+) (\\w+) (\\w+) -> (\\w+)$");
 
     private final Map<String, IntSupplier> wires = new HashMap<>();
     private final Map<String, Integer> memo = new HashMap<>();
@@ -31,7 +28,6 @@ class Circuit {
     }
 
     void parse(String line) {
-        // 123 -> x
         var matcher = input.matcher(line);
         if (matcher.find()) {
             var a = matcher.group(1);
@@ -39,25 +35,6 @@ class Circuit {
             wires.put(wire, () -> resolve(a));
             return;
         }
-        // x AND y -> z
-        matcher = and.matcher(line);
-        if (matcher.find()) {
-            var a = matcher.group(1);
-            var b = matcher.group(2);
-            var wire = matcher.group(3);
-            wires.put(wire, () -> resolve(a) & resolve(b));
-            return;
-        }
-        // p LSHIFT 2 -> q
-        matcher = lshift.matcher(line);
-        if (matcher.find()) {
-            var a = matcher.group(1);
-            var b = matcher.group(2);
-            var wire = matcher.group(3);
-            wires.put(wire, () -> resolve(a) << resolve(b));
-            return;
-        }
-        // NOT e -> f
         matcher = not.matcher(line);
         if (matcher.find()) {
             var a = matcher.group(1);
@@ -65,22 +42,19 @@ class Circuit {
             wires.put(wire, () -> ~resolve(a));
             return;
         }
-        // x OR y -> e
-        matcher = or.matcher(line);
+        matcher = binary.matcher(line);
         if (matcher.find()) {
             var a = matcher.group(1);
-            var b = matcher.group(2);
-            var wire = matcher.group(3);
-            wires.put(wire, () -> resolve(a) | resolve(b));
-            return;
-        }
-        // y RSHIFT 2 -> g
-        matcher = rshift.matcher(line);
-        if (matcher.find()) {
-            var a = matcher.group(1);
-            var b = matcher.group(2);
-            var wire = matcher.group(3);
-            wires.put(wire, () -> resolve(a) >> resolve(b));
+            var op = matcher.group(2);
+            var b = matcher.group(3);
+            var wire = matcher.group(4);
+            wires.put(wire, switch (op) {
+                case "AND" -> () -> resolve(a) & resolve(b);
+                case "LSHIFT" -> () -> resolve(a) << resolve(b);
+                case "OR" -> () -> resolve(a) | resolve(b);
+                case "RSHIFT" -> () -> resolve(a) >> resolve(b);
+                default -> throw new IllegalArgumentException("Failed to parse op '" + op + "'!");
+            });
             return;
         }
         throw new IllegalArgumentException("Failed to parse line '" + line + "'!");
