@@ -53,6 +53,7 @@ class Fighter {
         return health > 0;
     }
 
+    // FIXME : Reimplement as Figher.attack(Fighter other)
     int totalDamage() {
         return damage + equipment.stream()
                 .mapToInt(Item::damage)

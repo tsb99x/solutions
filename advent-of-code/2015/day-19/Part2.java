@@ -8,15 +8,14 @@ import java.util.stream.Stream;
 
 /*
 FIXME : This runtime stats are horrendous!
-TODO: Replace length-limiting BFS with sans-seen BFS?
 
-time java Part2v4.java < input.txt
+time java Part2.java < input.txt
 207
 
 ________________________________________________________
-Executed in   55.63 secs    fish           external
-   usr time   16.37 mins  702.00 micros   16.37 mins
-   sys time    0.77 mins  240.00 micros    0.77 mins
+Executed in   24.49 secs    fish           external
+   usr time  469.67 secs  625.00 micros  469.67 secs
+   sys time   18.73 secs  341.00 micros   18.73 secs
  */
 
 class Chemistry {
@@ -43,13 +42,18 @@ class Chemistry {
 
     private List<String> simplify(Collection<String> molecules) {
         return molecules.parallelStream()
-                .flatMap(oldMolecule -> replacements.entrySet().stream()
-                        .flatMap(replacement -> replacement.getValue().stream()
-                                .map(alt -> replacement.getKey()
-                                        .matcher(oldMolecule)
-                                        .replaceFirst(alt))
-                                .filter(s -> !s.equals(oldMolecule))
-                                .filter(s -> s.length() <= oldMolecule.length())))
+                .unordered()
+                .<String>mapMulti((oldMolecule, next) -> {
+                    for (var replacement : replacements.entrySet()) {
+                        var matcher = replacement.getKey().matcher(oldMolecule);
+                        for (var alt : replacement.getValue()) {
+                            var newMolecule = matcher.replaceFirst(alt);
+                            if (!newMolecule.equals(oldMolecule)) {
+                                next.accept(newMolecule);
+                            }
+                        }
+                    }
+                })
                 .distinct()
                 .toList();
     }
